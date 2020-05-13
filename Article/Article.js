@@ -1,4 +1,4 @@
-/* This is the data we will be using to create our articles */
+/* This is the data we will be using to create our article components */
 /* Look over this data, then proceed to line 91*/
 const data = [
   {
@@ -88,8 +88,8 @@ const data = [
   }
 ];
 
-/* Step 1: Write a component called 'articleMaker' to create an article. You want your component to return markup like the template below: 
-
+/* Step 1: Create a function that creates a component. You will want your component to look like the template below: 
+  
   <div class="article">
     <h2>{title of the article}</h2>
     <p class="date">{date of the article}</p>
@@ -101,13 +101,118 @@ const data = [
 
   Hint: You will need to use createElement more than once here!
 
-  Your function should take either an object as its one argument, or 5 separate arguments mapping to each piece of the data object above.
+  Your function should take either an object as it's one argument, or 5 separate arguments mapping to each piece of the data object above.
 
-  Step 2: Add an event listener to the expandButton span. This listener should toggle the class 'article-open' on the 'article' div.
+  Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div.
 
-  Step 3: Don't forget to return something from your function!
+  Step 3: return the entire component.
 
-  Step 4: Outside your function, loop over the data. At each iteration you'll use your component to create an article and append it to the DOM inside the 'articles' div.
+  Step 4: Map over the data, creating a component for each object and add each component to the DOM as children of the 'articles' div.
 
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
+
+*/
+
+
+//step 1 
+const articleCreator = (title, date, paragraphOne, paragraphTwo, paragraphThree)  => {
+  
+  //creating components
+  const article = document.createElement('div');
+  const titleContent = document.createElement('h2');
+  const titleDate = document.createElement('p');
+  const p1 = document.createElement('p');
+  const p2 = document.createElement('p');
+  const p3 = document.createElement('p');
+  const expandSpan = document.createElement('span');
+
+
+ //adding classes in
+ article.classList.add("article");
+ titleDate.classList.add("date");
+ expandSpan.classList.add("expandButton");
+
+//adding content
+titleContent.textContent = title;
+titleDate.textContent = date;
+p1.textContent = paragraphOne;
+p2.textContent = paragraphTwo;
+p3.textContent = paragraphThree;
+expandSpan.textContent = '\u058D';
+
+//appending children
+  article.appendChild(titleContent)
+  article.appendChild(titleDate)
+  article.appendChild(p1)
+  article.appendChild(p2)
+  article.appendChild(p3)
+  article.appendChild(expandSpan)
+
+  //step 2 adding eventListener 
+  expandSpan.addEventListener('click', () => {
+    article.classList.toggle("article-open")
+  });
+  //step 3 i'll assume means this
+  return article
+}
+
+
+const articleOne= document.querySelector('.articles')
+data.push({title: 'test article', date: 'its wednesday thats all you need', firstParagraph: 'brag brag waffle brag', secondParagraph: 'dng biscuits and gravy man. biscuits and gravy', thirdParagraph: 'still working on it'})
+//step 4 mapping over
+data.map((article) => {
+  articleOne.appendChild(articleCreator(article.title, article.date, article.firstParagraph, article.secondParagraph, article.thirdParagraph))
+})
+
+//step 5 adding new article hope i got this right
+//addedArticle.map((article) => {
+ // articleOne.appendChild(article(article.title, article.date, article.firstParagraph, article.secondParagraph, article.thirdParagraph))
+//})
+
+//data.push({title: 'test article', date: 'wednesday', firstParagraph: 'blah, blah', secondParagraph: 'black', thirdParagraph: 'still working on it'})
+
+
+/* working stretch goals. w.i.p.
+class Article {
+  constructor(domElement) {
+    // assign this.domElement to the passed in domElement
+    this.domElement = domElement;
+    // create a reference to the ".expandButton" class. 
+    this.expandButton = this.domElement.querySelector('.expandButton');
+    //Read button
+    this.readButton = this.domElement.querySelector('.readButton')
+    // Using your expandButton reference, update the text on your expandButton to say "expand"
+    this.expandButton.innerText = 'Click to Expand';
+    // Set a click handler on the expandButton reference, calling the expandArticle method.
+    this.expandButton.addEventListener('click', () => this.expandArticle())
+    //Read button
+    this.readButton.addEventListener('click', () => {this.domElement.style.display = 'none'})
+  }
+
+  expandArticle() {
+    // Using our reference to the domElement, toggle a class to expand or hide the article.
+    if(this.expandButton.innerText === 'Click to Expand'){
+      this.expandButton.innerText = 'Click to Close';
+      this.domElement.classList.toggle('article-open')
+      TweenMax.to(".article-open", .5, {
+        height:400,
+      })
+    }else if(this.expandButton.innerText === 'Click to Close'){
+      this.expandButton.innerText = 'Click to Expand';
+      TweenMax.to(".article-open", .5, {
+        height:50,
+      })
+      setTimeout(()=>{
+        this.domElement.classList.toggle('article-open')
+      }, 500)
+    }
+  }
+}
+
+let articles = document.querySelectorAll('.article');
+
+articles.forEach( article => {
+  return new Article(article);
+  // article.querySelector('.expandButton').innerText = 'expand';
+}
 */

@@ -11,46 +11,39 @@
   height: 50px;
   overflow: hidden;
   box-shadow: 2px 2px 2px lightgrey;
-
-  h2 {
-    display: flex;
-    justify-content: space-between;
-    font-size: 28px;
-    padding: 0;
-    margin: 15px 0 0;
-  }
-
-  .date {
-    margin: 0;
-    font-size: 14px;
-  }
-
-  .close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-  }
-
-  .expandButton {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    font-size: 12px;
-    color: grey;
-    cursor: pointer;
-    transform: translate(-50%);
-    background-color: white;
-  }
 }
-
-button{
+.article h2 {
+  display: flex;
+  justify-content: space-between;
+  font-size: 28px;
+  padding: 0;
+  margin: 15px 0 0;
+}
+.article .date {
+  margin: 0;
+  font-size: 14px;
+}
+.article .close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+.article .expandButton {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  font-size: 12px;
+  color: grey;
+  cursor: pointer;
+  transform: translate(-50%);
   background-color: white;
 }
-
+button {
+  background-color: white;
+}
 .article-open {
   height: 400px;
 }
-
 /* idea for my stretch goals
 #flyOutMenu {
   width: 100vw;
@@ -71,8 +64,4 @@ button{
 #flyOutMenu h2 a:hover {
   text-decoration: underline;
 }   
-*/    
-
-
-
-
+*/
